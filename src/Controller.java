@@ -11,6 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
@@ -42,6 +44,7 @@ public class Controller implements Serializable{
         String province;
         String zipCode;
         String direction;
+
             do {
                 System.out.println("Que vols fer?");
                 System.out.println("0.Sortir");
@@ -81,6 +84,7 @@ public class Controller implements Serializable{
                                     option3 = keyboard.nextInt();
 
                                     if (option3 == 1) {
+                                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                                         System.out.println("ID del producte:");
                                         idproduct = keyboard.nextInt();
                                         keyboard.nextLine();
@@ -94,7 +98,16 @@ public class Controller implements Serializable{
                                         System.out.println("Stock del producte:");
                                         stock = keyboard.nextInt();
 
-                                        Product p = new Product(idproduct, name, price, stock);
+                                        System.out.println("Fecha de inicio del catalogo (Data (dd/MM/yyyy):");
+                                        String startDate = keyboard.next();
+                                        LocalDate sd = LocalDate.parse(startDate, dtf);
+
+                                        System.out.println("Fecha de fin del catalogo (Data (dd/MM/yyyy):");
+                                        String endingDate = keyboard.next();
+                                        LocalDate ed = LocalDate.parse(endingDate, dtf);
+
+
+                                        Product p = new Product(idproduct, name, price, stock, sd, ed);
 
                                         prod.add(p);
                                         System.out.println("Producte afegit");
@@ -174,6 +187,8 @@ public class Controller implements Serializable{
                                     idproduct = keyboard.nextInt();
                                     keyboard.nextLine();
                                     if (prod.search(idproduct) != null) {
+                                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
                                         System.out.println("Nom del producte:");
                                         name = keyboard.nextLine();
 
@@ -183,7 +198,15 @@ public class Controller implements Serializable{
                                         System.out.println("Stock del producte:");
                                         stock = keyboard.nextInt();
 
-                                        Product p = new Product(idproduct, name, price, stock);
+                                        System.out.println("Fecha de inicio del catalogo (Data (dd/MM/yyyy):");
+                                        String startDate = keyboard.next();
+                                        LocalDate sd = LocalDate.parse(startDate, dtf);
+
+                                        System.out.println("Fecha de fin del catalogo (Data (dd/MM/yyyy):");
+                                        String endingDate = keyboard.next();
+                                        LocalDate ed = LocalDate.parse(endingDate, dtf);
+
+                                        Product p = new Product(idproduct, name, price, stock, sd, ed);
                                         prod.modify(p);
 
                                         Product products = (Product) prod.search(idproduct);

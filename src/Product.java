@@ -1,5 +1,6 @@
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Product implements Identificable, Serializable, Comparable<Product>{
@@ -8,6 +9,8 @@ public class Product implements Identificable, Serializable, Comparable<Product>
     private String name;
     private int price;
     private int stock;
+    private LocalDate startCatalogue;
+    private LocalDate endingCatalogue;
     private static final long serialVersionUID = 6529685098267757690L;
     
     @Override
@@ -49,11 +52,13 @@ public class Product implements Identificable, Serializable, Comparable<Product>
     }
 
     //El constructors del produte
-    public Product(int idproduct, String nom, int price, int stock) {
+    public Product(int idproduct, String nom, int price, int stock, LocalDate startCatalogue, LocalDate endingCatalogue) {
         this.idProduct = idproduct;
         this.name = nom;
         this.price = price;
         this.stock = stock;
+        this.startCatalogue = startCatalogue;
+        this.endingCatalogue = endingCatalogue;
     }
 
     public Product(int idproduct, String nom, int price) {
@@ -65,7 +70,7 @@ public class Product implements Identificable, Serializable, Comparable<Product>
     //El metode toString
     @Override
     public String toString() {
-        return "Producte{" + "idproduct=" + idProduct + ", nom=" + name + ", price=" + price + ", stock=" + stock + '}';
+        return "Producte{" + "idproduct=" + idProduct + ", nom=" + name + ", price=" + price + ", stock=" + stock + ", startCatalogue=" + startCatalogue + ", endingCatalogue=" + endingCatalogue +'}';
     }
 
     //Metode equals del name
