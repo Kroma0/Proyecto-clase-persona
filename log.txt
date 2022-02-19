@@ -1,0 +1,10 @@
+feb 19, 2022 12:10:37 P. M. Main main
+INFORMACIÓN: Start of Log
+feb 19, 2022 12:10:44 P. M. Main main
+DETALLADO: End of Log
+feb 19, 2022 12:26:03 P. M. Main main
+INFORMACIÓN: Start of Log
+feb 19, 2022 1:00:24 P. M. Main main
+INFORMACIÓN: Start of Log
+feb 19, 2022 1:02:41 P. M. Main main
+DETALLADO: End of Log

@@ -5,6 +5,11 @@ import java.util.LinkedHashSet;
 
 public class Client extends Person implements Serializable{
 
+    public Client(int idperson, String dni, String name, String surnames, Address address, LinkedHashSet<String> phone) {
+        super(idperson, dni, name, surnames, address, phone);
+
+    }
+
     public Client(int idperson, String dni, String name, String surnames, Address address) {
         super(idperson, dni, name, surnames, address);
 

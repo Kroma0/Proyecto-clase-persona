@@ -12,8 +12,11 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.TreeSet;
+
+import javax.sound.sampled.SourceDataLine;
 
 public class Controller implements Serializable{
 
@@ -125,11 +128,15 @@ public class Controller implements Serializable{
                                                 id = keyboard.nextInt();
                                                 Product pr = (Product) prod.get(id);
                                                 if (productList.contains(pr)) {
-                                                    System.out.println("Este producto ya existe en el pack por lo cual no se añadira");
+                                                    System.out.println("Aquest producte ja existeix per la qual cosa no s'afegirà");
                                                 }
                                                 productList.add(pr);
                                             }
                                         }while(option4 != 0);
+
+                                        if (prod.containsProducts(productList)) {
+                                            System.out.println("Ja exiteix un pack amb aquests productes");
+                                        }
                                         Pack p = new Pack(productList, percentatgeDiscount, idproduct, name, price);
                                         prod.add(p);
                                         System.out.println("Pack afegit");
@@ -321,8 +328,24 @@ public class Controller implements Serializable{
                                     System.out.println("Direcció del client");
                                     direction = keyboard.nextLine();
 
+                                    LinkedHashSet<String> phoneList = new LinkedHashSet<>();
+                                        int option4;
+                                        do{
+                                            System.out.println("0.Sortir");
+                                            System.out.println("1.Afegir numero de telefon");
+                                            option4 = keyboard.nextInt();
+                                            keyboard.nextLine();
+                                            if(option4 == 1){
+                                                System.out.println("Escriu telefon que vols afegir");
+                                                String pr = keyboard.nextLine();
+                                                if (phoneList.contains(pr)) {
+                                                    System.out.println("Aquest telèfon ja existeix per la qual cosa no s'afegirà");
+                                                }
+                                                phoneList.add(pr);
+                                            }
+                                        }while(option4 != 0);
                                     Address a = new Address(locality, province, zipCode, direction);
-                                    Client cl = new Client(idperson, dni, name, surnames, a);
+                                    Client cl = new Client(idperson, dni, name, surnames, a, phoneList);
 
                                     clie.add(cl);
                                     System.out.println("Client afegit");
@@ -420,9 +443,26 @@ public class Controller implements Serializable{
                                     System.out.println("Direcció del client");
                                     direction = keyboard.nextLine();
 
+                                    LinkedHashSet<String> phoneList = new LinkedHashSet<>();
+                                        int option4;
+                                        do{
+                                            System.out.println("0.Sortir");
+                                            System.out.println("1.Afegir numero de telefon");
+                                            option4 = keyboard.nextInt();
+                                            keyboard.nextLine();
+                                            if(option4 == 1){
+                                                System.out.println("Escriu telefon que vols afegir");
+                                                String pr = keyboard.nextLine();
+                                                if (phoneList.contains(pr)) {
+                                                    System.out.println("Aquest telèfon ja existeix per la qual cosa no s'afegirà");
+                                                }
+                                                phoneList.add(pr);
+                                            }
+                                        }while(option4 != 0);
+
                                     Address a = new Address(locality, province, zipCode, direction);
 
-                                    Supplier s = new Supplier(idperson, dni, name, surnames, a);
+                                    Supplier s = new Supplier(idperson, dni, name, surnames, a, phoneList);
 
                                     prov.add(s);
                                     System.out.println("Proveidor afegit");

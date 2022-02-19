@@ -93,19 +93,21 @@ public abstract class Person implements Identificable, Serializable{
         return count;
     }
 
-    protected Person(Integer idperson, String dni, String name, String surnames) {
-        this.idperson = idperson;
-        this.dni = dni;
-        this.name = name;
-        this.surnames = surnames;
-    }
-    
-    protected Person(int idperson, String dni, String name, String surnames, Address address) {
+    protected Person(Integer idperson, String dni, String name, String surnames, Address address) {
         this.idperson = idperson;
         this.dni = dni;
         this.name = name;
         this.surnames = surnames;
         this.address = address;
+    }
+    
+    protected Person(int idperson, String dni, String name, String surnames, Address address, LinkedHashSet<String> phone) {
+        this.idperson = idperson;
+        this.dni = dni;
+        this.name = name;
+        this.surnames = surnames;
+        this.address = address;
+        this.phone = phone;
     }
 
     protected Person(int i, String d, String n, String c, LocalDate b, LinkedHashSet<String> p, String e, Address a) {

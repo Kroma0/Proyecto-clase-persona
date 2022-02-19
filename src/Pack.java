@@ -49,9 +49,9 @@ public final class Pack extends Product  implements Serializable{
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Pack) {
-            Pack temp = (Pack) obj;
-            return temp.getName().equals(obj);
+        if (obj instanceof Product) {
+            Product temp = (Product) obj;
+            return temp.equals(obj);
         } else {
             return false;
         }

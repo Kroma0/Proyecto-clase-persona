@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 public class DAO<T extends Identificable> implements Persistable<T>, Serializable {
     
@@ -48,7 +49,10 @@ public class DAO<T extends Identificable> implements Persistable<T>, Serializabl
         oos.writeObject(this.hmDAO);
         oos.close();
     }
-    
+
+    public boolean containsProducts(TreeSet<Product> pr){
+        return hmDAO.containsValue(pr);
+    }
     // public void open(String file) throws IOException{
     //     ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
     //     try {
