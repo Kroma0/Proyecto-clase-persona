@@ -51,6 +51,7 @@ public class Controller implements Serializable{
                 System.out.println("1.Productes");
                 System.out.println("2.Clients");
                 System.out.println("3.Proveïdors");
+                System.out.println("4.Control de presencia");
 
                 option = keyboard.nextInt();
                 keyboard.nextLine();
@@ -540,13 +541,32 @@ public class Controller implements Serializable{
                                     prov.delete(idperson);
                                     break;
                                 case 5:
-                                    Persistable p = prov;
-                                    print(p);
+                                    System.out.println("Que vols fer?");
+                                    System.out.println("0.Sortir");
+                                    System.out.println("1.Fitxar entrada");
+                                    System.out.println("2.Fitxar sortida");
+                                    System.out.println("3.Consultar fitxada");
+                                    option2 = keyboard.nextInt();
+                                    keyboard.nextLine();
+                                    switch (option2) {
+                                        case 1:
+                                            
+                                        break;
+                                    }
                                     break;
                             }
 
                         } while (option2 != 0);
                         break;
+                    case 4:
+                        System.out.println("Que vols fer?");
+                        System.out.println("0.Sortir");
+                        System.out.println("1.Afegir proveidor");
+                        System.out.println("2.Buscar proveidor");
+                        System.out.println("3.Modificar proveidor");
+                        option2 = keyboard.nextInt();
+                        keyboard.nextLine();
+                        switch (option2) {}
                 }
             } while (option != 0);
 
