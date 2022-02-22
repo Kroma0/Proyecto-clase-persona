@@ -13,8 +13,13 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -27,7 +32,7 @@ public class Controller implements Serializable{
     private DAO<Client> clie = new DAO();
 
     public void run() throws IOException, Exception  {
-        // prod.open("products.dat");
+        //prod.open("products.dat");
         Scanner keyboard = new Scanner(System.in);
         int idperson;
         String dni;
@@ -74,6 +79,8 @@ public class Controller implements Serializable{
                             System.out.println("8.Guardar tots els productes");
                             System.out.println("9.Obrir archiu amb productes");
                             System.out.println("10.Fer una comanda");
+                            System.out.println("11.Productes ordenats");
+                            System.out.println("12.Productes descatalogats ");
 
                             option2 = keyboard.nextInt();
                             keyboard.nextLine();
@@ -308,6 +315,55 @@ public class Controller implements Serializable{
                                         }
                                     }while(option3 != 0);
                                     break;
+                                case 11:
+                                    List<Product> allProd = new ArrayList<Product>(prod.getMap().values());
+                                    System.out.println("Per que vols ordenar la llista de productes?");
+                                    System.out.println("1.Nom");
+                                    System.out.println("2.Preu");
+                                    System.out.println("3.Stock");
+                                    
+                                    option3 = keyboard.nextInt();
+                                    
+                                    switch (option3) {
+                                        case 1:
+                                            Collections.sort(allProd, (pr1, pr2) -> pr1.getName().compareTo(pr2.getName()));
+                                            System.out.println(allProd.toString());
+                                            break;
+                                        case 2:
+                                            Collections.sort(allProd, (pr1, pr2) -> pr1.getPrice().compareTo(pr2.getPrice()));
+                                            System.out.println(allProd.toString());
+                                            break;
+                                        case 3:
+                                            Collections.sort(allProd, (pr1, pr2) -> pr1.getStock().compareTo(pr2.getStock()));
+                                            System.out.println(allProd.toString());
+                                            break;
+                                    
+                                        default:
+                                            System.out.println("Esta opcion no existe");
+                                            break;
+                                    }
+                                    System.out.println(allProd.toString());
+                                break;
+
+                                case 12:
+                                    //List<Product> allProd = new ArrayList<Product>(prod.getMap().values());
+                                    List<Product> allProd2 = new ArrayList<Product>(prod.getMap().values());
+                                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                    System.out.println("Introduce fecha a comparar:");
+                                    String fecha = keyboard.next();
+                                    
+                                    if (fecha == null) {
+                                        LocalDate fecha2 = java.time.LocalDate.now();
+                                        showDiscontinued(fecha2);
+
+                                    } else {
+                                        LocalDate fech = LocalDate.parse(fecha, dtf);
+                                        showDiscontinued(fech);
+
+                                    }
+                                    
+                                break;
+
                                 default:
                                     System.out.println("Opción incorrecta");
                                     break;
@@ -574,5 +630,16 @@ public class Controller implements Serializable{
 
     public static void print(Persistable obj) {
         System.out.println(obj.getMap().toString());
+    }
+    
+    public void showDiscontinued(LocalDate data){
+        HashMap<Integer, Product> prods = prod.getMap();
+        for (Product pr : prods.values()) {
+            if (pr.getEndingCatalogue().compareTo(data) < 0) {
+                System.out.println("Productos descatalogados:");
+                System.out.println("Hace "+ChronoUnit.DAYS.between(pr.getEndingCatalogue(), data)+" dias que se descatalogo: "+ pr.toString());
+            }
+            
+        }
     }
 }

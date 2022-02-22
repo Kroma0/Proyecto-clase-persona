@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeSet;
 
 public class DAO<T extends Identificable> implements Persistable<T>, Serializable {
@@ -53,14 +55,15 @@ public class DAO<T extends Identificable> implements Persistable<T>, Serializabl
     public boolean containsProducts(TreeSet<Product> pr){
         return hmDAO.containsValue(pr);
     }
-    // public void open(String file) throws IOException{
-    //     ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-    //     try {
-    //         this.hmDAO = (HashMap<Integer, T>) ois.readObject();
-    //     } catch (ClassNotFoundException ex) {
-    //         ex.printStackTrace();
-    //     }
-    //     ois.close();
-    // }
+    
+    public void open(String file) throws IOException{
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+        try {
+            this.hmDAO = (HashMap<Integer, T>) ois.readObject();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        ois.close();
+    }
 
 }

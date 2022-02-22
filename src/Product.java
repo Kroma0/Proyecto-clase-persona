@@ -7,8 +7,8 @@ public class Product implements Identificable, Serializable, Comparable<Product>
 
     private Integer idProduct;
     private String name;
-    private int price;
-    private int stock;
+    private Integer price;
+    private Integer stock;
     private LocalDate startCatalogue;
     private LocalDate endingCatalogue;
     private static final long serialVersionUID = 6529685098267757690L;
@@ -26,11 +26,11 @@ public class Product implements Identificable, Serializable, Comparable<Product>
         return name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public int getStock() {
+    public Integer getStock() {
         return stock;
     }
 
@@ -50,6 +50,35 @@ public class Product implements Identificable, Serializable, Comparable<Product>
     public void setStock(int s) {
         this.stock = s;
     }
+    
+    /**
+     * @return LocalDate return the startCatalogue
+     */
+    public LocalDate getStartCatalogue() {
+        return startCatalogue;
+    }
+
+    /**
+     * @param startCatalogue the startCatalogue to set
+     */
+    public void setStartCatalogue(LocalDate startCatalogue) {
+        this.startCatalogue = startCatalogue;
+    }
+
+    /**
+     * @return LocalDate return the endingCatalogue
+     */
+    public LocalDate getEndingCatalogue() {
+        return endingCatalogue;
+    }
+
+    /**
+     * @param endingCatalogue the endingCatalogue to set
+     */
+    public void setEndingCatalogue(LocalDate endingCatalogue) {
+        this.endingCatalogue = endingCatalogue;
+    }
+
 
     //El constructors del produte
     public Product(int idproduct, String nom, int price, int stock, LocalDate startCatalogue, LocalDate endingCatalogue) {
@@ -70,7 +99,7 @@ public class Product implements Identificable, Serializable, Comparable<Product>
     //El metode toString
     @Override
     public String toString() {
-        return "Producte{" + "idproduct=" + idProduct + ", nom=" + name + ", price=" + price + ", stock=" + stock + ", startCatalogue=" + startCatalogue + ", endingCatalogue=" + endingCatalogue +'}';
+        return "Producte{" + "idproduct=" + idProduct + ", name=" + name + ", price=" + price + ", stock=" + stock + ", startCatalogue=" + startCatalogue + ", endingCatalogue=" + endingCatalogue +'}';
     }
 
     //Metode equals del name
@@ -118,4 +147,5 @@ public class Product implements Identificable, Serializable, Comparable<Product>
         }
     }
 
+    
 }
