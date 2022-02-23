@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Controller implements Serializable{
     private DAO<Product> prod = new DAO();
     private DAO<Supplier> prov = new DAO();
     private DAO<Client> clie = new DAO();
+    private PresenceRegisterDAO pres = new PresenceRegisterDAO();
 
     public void run() throws IOException, Exception  {
         //prod.open("products.dat");
@@ -597,32 +599,41 @@ public class Controller implements Serializable{
                                     prov.delete(idperson);
                                     break;
                                 case 5:
-                                    System.out.println("Que vols fer?");
-                                    System.out.println("0.Sortir");
-                                    System.out.println("1.Fitxar entrada");
-                                    System.out.println("2.Fitxar sortida");
-                                    System.out.println("3.Consultar fitxada");
-                                    option2 = keyboard.nextInt();
-                                    keyboard.nextLine();
-                                    switch (option2) {
-                                        case 1:
-                                            
-                                        break;
-                                    }
+                                    print(prov);
                                     break;
                             }
 
                         } while (option2 != 0);
                         break;
                     case 4:
-                        System.out.println("Que vols fer?");
-                        System.out.println("0.Sortir");
-                        System.out.println("1.Afegir proveidor");
-                        System.out.println("2.Buscar proveidor");
-                        System.out.println("3.Modificar proveidor");
-                        option2 = keyboard.nextInt();
-                        keyboard.nextLine();
-                        switch (option2) {}
+                        do {
+                            System.out.println("Que vols fer?");
+                            System.out.println("0.Sortir");
+                            System.out.println("1.Fitxar entrada");
+                            System.out.println("2.Fitxar sortida");
+                            System.out.println("3.Consultar fitxada");
+                            option2 = keyboard.nextInt();
+                            keyboard.nextLine();
+                            switch (option2) {
+                                case 1:
+                                    System.out.println("ID del treballador a fitxar la entrada:");
+                                    int idPresence1 = keyboard.nextInt();
+                                    Presence p = new Presence(idPresence1, LocalDate.now(), LocalTime.now());
+                                    pres.add(p);
+                                    break;
+                                case 2:
+                                    System.out.println("ID del treballador a fitxar la sortida:");
+                                    int idPresence2 = keyboard.nextInt();
+                                    pres.clockOut(idPresence2);
+                                    break;
+                                case 3:
+                                    System.out.println("ID del treballador a fitxar la sortida:");
+                                    int idPresence3 = keyboard.nextInt();
+                                    System.out.println(pres.getWorker(idPresence3));
+                                    break;
+                            }
+                        } while (option2 != 0);
+                        break;
                 }
             } while (option != 0);
 
