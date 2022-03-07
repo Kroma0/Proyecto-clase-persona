@@ -11,18 +11,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.TreeSet;
+import java.util.Locale.Category;
 
 import javax.sound.sampled.SourceDataLine;
 
@@ -32,6 +37,14 @@ public class Controller implements Serializable{
     private DAO<Supplier> prov = new DAO();
     private DAO<Client> clie = new DAO();
     private PresenceRegisterDAO pres = new PresenceRegisterDAO();
+
+    Locale localitzacioFormat = Locale.getDefault(Category.FORMAT);
+    Locale localitzacioDisplay = Locale.getDefault(Category.DISPLAY);
+
+    ResourceBundle texts = ResourceBundle.getBundle("Texts", localitzacioDisplay);
+    NumberFormat numberFormatter = NumberFormat.getNumberInstance(localitzacioFormat);
+    NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(localitzacioFormat);
+    DateTimeFormatter pattern = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(localitzacioFormat);
 
     public void run() throws IOException, Exception  {
         //prod.open("products.dat");
@@ -53,12 +66,12 @@ public class Controller implements Serializable{
         String direction;
 
             do {
-                System.out.println("Que vols fer?");
-                System.out.println("0.Sortir");
-                System.out.println("1.Productes");
-                System.out.println("2.Clients");
-                System.out.println("3.Proveïdors");
-                System.out.println("4.Control de presencia");
+                System.out.println(texts.getString("0000"));//"Que vols fer?"
+                System.out.println(texts.getString("0001"));//"0.Sortir"
+                System.out.println(texts.getString("0002"));//"1.Productes"
+                System.out.println(texts.getString("0003"));//"2.Clients"
+                System.out.println(texts.getString("0004"));//"3.Proveïdors"
+                System.out.println(texts.getString("0005"));//"4.Control de presencia"
 
                 option = keyboard.nextInt();
                 keyboard.nextLine();
