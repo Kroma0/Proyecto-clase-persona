@@ -632,6 +632,8 @@ public class Controller implements Serializable{
                                     System.out.println("ID del treballador a fitxar la entrada:");
                                     int idPresence1 = keyboard.nextInt();
                                     Presence p = new Presence(idPresence1, LocalDate.now(), LocalTime.now());
+                                    //con este sout vemos como varia la fecha dependiendo del idioma del sistema
+                                    System.out.println(LocalDate.now().format(pattern));
                                     pres.add(p);
                                     break;
                                 case 2:
